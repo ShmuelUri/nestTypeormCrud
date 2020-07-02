@@ -7,9 +7,11 @@ async function bootstrap() {
 
     const options = new DocumentBuilder()
     .setTitle('Books Market')
-    .setDescription('The todo API description')
+    .setDescription('The books API description')
     .setVersion('1.0')
-    .addTag('auther')
+    .addTag('author')
+    .addTag('book')
+    .addTag('category')
     .build();
 
     const document = SwaggerModule.createDocument(app, options);
