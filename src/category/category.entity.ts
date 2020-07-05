@@ -9,11 +9,10 @@ export class Category {
      @Column()
      name: string;
 
-     @Column({nullable:true})
-     description?: string;
 
     @ManyToMany(() => Book, book => book.categories ,{
-        cascade: true
+        cascade: true,
+        eager: true
     })
     @JoinTable()
     books: Book[];

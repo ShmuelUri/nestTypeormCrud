@@ -4,15 +4,18 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { BookModule } from './book/book.module';
-import { authorModule } from './author/author.module';
+import { AuthorModule } from './author/author.module';
 import { CategoryModule } from './category/category.module';
+import { DefaultAdminModule} from 'nestjs-admin';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
     BookModule,
-    authorModule,
-    CategoryModule],
+    AuthorModule,
+    CategoryModule,
+    DefaultAdminModule,
+   ],
     controllers: [AppController],
     providers: [AppService],
 })
