@@ -1,15 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany } from 'typeorm';
+import { Author } from '../author/author.entity';
+import { Category } from '../category/category.entity';
 
 @Entity()
 export class Book {
     @PrimaryGeneratedColumn()
-     id: number; 
+    id: number; 
 
-     @Column()
+    @Column()
      name: string;
 
-     @Column()
+    @Column()
      description: string;
+
+    @ManyToOne(() => Author, author => author.books)
+     author: Author;
+
+    @ManyToMany(() => Category, category => category.books, )
+    categories: Category[];
+
 
     @CreateDateColumn()
     create_at: Date

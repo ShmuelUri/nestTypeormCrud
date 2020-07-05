@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from 'typeorm';
+import {Book} from '../book/book.entity'
 
 @Entity()
 export class Category {
@@ -11,10 +12,16 @@ export class Category {
      @Column({nullable:true})
      description?: string;
 
-     @CreateDateColumn()
-        create_at: Date
+    @ManyToMany(() => Book, book => book.categories ,{
+        cascade: true
+    })
+    @JoinTable()
+    books: Book[];
+
+    @CreateDateColumn()
+    create_at: Date
 
     @UpdateDateColumn()
-        updated_at: Date
+    updated_at: Date
 }
 
