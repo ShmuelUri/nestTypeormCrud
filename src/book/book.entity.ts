@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 import { Author } from '../author/author.entity';
 import { Category } from '../category/category.entity';
+
 
 @Entity()
 export class Book {
@@ -16,7 +17,11 @@ export class Book {
     @ManyToOne(() => Author, author => author.books)
      author: Author;
 
-    @ManyToMany(() => Category, category => category.books, )
+    @ManyToMany(() => Category, category => category.books ,{
+        cascade: true,
+        
+    })
+    @JoinTable()
     categories: Category[];
 
 
