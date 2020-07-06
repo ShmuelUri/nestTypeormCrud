@@ -8,6 +8,13 @@ import { ApiTags } from '@nestjs/swagger';
 @Crud({
     model: {
       type: Category
+    },
+    query:{
+      join:{
+        books: {
+          allow: ['id', 'name'],
+        }
+      }
     }
   })
 @Controller('category')

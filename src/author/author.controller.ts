@@ -7,6 +7,13 @@ import { ApiTags } from '@nestjs/swagger';
 @Crud({
     model: {
       type: Author
+    },
+    query:{
+      join:{
+        books: {
+          allow: ['id', 'name'],
+        }
+      }
     }
   })
 @Controller('author')
