@@ -1,5 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { sign } from 'jsonwebtoken';
+
+import { JwtService } from '@nestjs/jwt';
 
 export enum Provider
 {
@@ -9,11 +10,8 @@ export enum Provider
 @Injectable()
 export class AuthService {
     
-    // create secret key with this command: node -e "console.log(require('crypto').randomBytes(256).toString('base64'));"
-    private readonly JWT_SECRET_KEY = process.env.JWT_SECRET_KEY; 
-
-    // constructor(/*private readonly usersService: UsersService*/) {
-    // };
+    constructor(private jwtService: JwtService , /*private readonly usersService: UsersService*/) {
+    }
 
     async validateOAuthLogin(thirdPartyId: string, provider: Provider): Promise<string>
     {
@@ -31,7 +29,7 @@ export class AuthService {
                 provider
             }
 
-            const jwt: string = sign(payload, this.JWT_SECRET_KEY, { expiresIn: 3600 });
+            const jwt: string = this.jwtService.sign(payload);
             return jwt;
         }
         catch (err)
