@@ -18,9 +18,7 @@ export class Author {
     @UpdateDateColumn()
     updated_at: Date;
 
-    @OneToMany(() => Book, book => book.author, {
-        cascade: true
-    })
+    @OneToMany(() => Book, book => book.author)
     books: Book[];
 
 }

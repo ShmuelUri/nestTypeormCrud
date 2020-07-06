@@ -14,12 +14,15 @@ export class Book {
     @Column()
      description: string;
 
-    @ManyToOne(() => Author, author => author.books)
+    @ManyToOne(() => Author, author => author.books,{
+        cascade: true,
+        eager: true
+    })
      author: Author;
 
     @ManyToMany(() => Category, category => category.books ,{
         cascade: true,
-        
+        eager: true  
     })
     @JoinTable()
     categories: Category[];
