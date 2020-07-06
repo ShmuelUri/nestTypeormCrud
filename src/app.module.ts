@@ -7,6 +7,7 @@ import { BookModule } from './book/book.module';
 import { AuthorModule } from './author/author.module';
 import { CategoryModule } from './category/category.module';
 import { DefaultAdminModule} from 'nestjs-admin';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { DefaultAdminModule} from 'nestjs-admin';
     AuthorModule,
     CategoryModule,
     DefaultAdminModule,
+    AuthModule,
    ],
     controllers: [AppController],
     providers: [AppService],
