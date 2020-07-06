@@ -7,7 +7,23 @@ import {Book} from './book.entity';
 @Crud({
     model: {
       type: Book
-     }  
+     } ,
+     routes:{
+      deleteOneBase:{returnDeleted: true}
+     },
+     query:{
+       join:{
+          categories:{
+              eager: true,
+              allow: ['name', 'id']
+          },
+          author:{
+              eager: true,
+              exclude: ['create_at', 'updated_at']
+        }
+          
+       }
+     }
   })
 
 @Controller('book')
