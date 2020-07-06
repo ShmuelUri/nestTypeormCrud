@@ -5,6 +5,8 @@ import { GoogleStrategy } from './google.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 
+// to generate secret key run this command:
+// node -e "console.log(require('crypto').randomBytes(256).toString('base64'));" 
 
 
 @Module({
