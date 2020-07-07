@@ -8,6 +8,9 @@ import { UserService } from "./user.service";
   model: {
     type: User
   },
+  routes: {
+    only: ["createOneBase", "updateOneBase", 'replaceOneBase'],
+  },
   query:{
       allow:['id', 'user_name', 'full_name']
   }

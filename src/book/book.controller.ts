@@ -20,11 +20,11 @@ import {Book} from './book.entity';
           author:{
               eager: true,
               exclude: ['create_at', 'updated_at']
-        }
-          
-       }
+          },       
+       },
+           
      }
-  })
+    })
 
 @Controller('book')
 @ApiTags('book')
