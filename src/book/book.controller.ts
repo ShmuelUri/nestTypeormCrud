@@ -1,8 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller} from '@nestjs/common';
 import {BookService} from './book.service';
-import { Crud, CrudController } from "@nestjsx/crud";
+import { Crud, CrudController, CrudAuth } from "@nestjsx/crud";
 import { ApiTags } from '@nestjs/swagger';
 import {Book} from './book.entity';
+
 
 @Crud({
     model: {
@@ -24,7 +25,14 @@ import {Book} from './book.entity';
        },
            
      }
-    })
+})
+// @CrudAuth({
+//     property: 'user',
+//     filter: (user: User) => ({
+//       id: user.id,
+//     //   isActive: true,
+//     })
+//   })
 
 @Controller('book')
 @ApiTags('book')

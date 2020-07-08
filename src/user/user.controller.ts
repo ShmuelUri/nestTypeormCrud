@@ -12,7 +12,7 @@ import { UserService } from "./user.service";
     only: ["createOneBase", "updateOneBase", 'replaceOneBase'],
   },
   query:{
-      allow:['id', 'user_name', 'full_name']
+      allow:['id', 'username', 'name']
   }
 })
 
