@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { Controller, Get, UseGuards,  Req } from '@nestjs/common';
+import { Controller, Get, UseGuards, Req, Post, } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -19,11 +19,15 @@ export class AuthController {
     googleLoginCallback(@Req() req: any):any {// , @Res() res: any
         return req.user
         // const jwt: string = req.user.jwt;
-        // if (jwt)
-        //     //  TODO
-        //     res.redirect('http://localhost:4200/login/succes/' + jwt);
-        // else 
-        //     res.redirect('http://localhost:4200/login/failure');
+        
     }
+
+    @UseGuards(AuthGuard('local'))
+    @Post('auth/login')
+    async login(@Req() req) {
+    return req.user;
+  }
+
+
 
 }

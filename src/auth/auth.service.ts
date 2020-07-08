@@ -1,6 +1,6 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { UserService } from 'src/user/user.service';
 
 export enum Provider
 {
@@ -10,10 +10,10 @@ export enum Provider
 @Injectable()
 export class AuthService {
     
-    constructor(private jwtService: JwtService , /*private readonly usersService: UsersService*/) {
+    constructor(private jwtService: JwtService , private readonly userService: UserService) {
     }
 
-    async validateOAuthLogin(thirdPartyId: string, provider: Provider): Promise<string>
+    async validateOAuthLogin(thirdPartyId: string, provider: Provider, email: string): Promise<string>
     {
         try 
         {
@@ -26,7 +26,8 @@ export class AuthService {
                 
             const payload = {
                 thirdPartyId,
-                provider
+                provider,
+                email
             }
 
             const jwt: string = this.jwtService.sign(payload);
@@ -37,5 +38,25 @@ export class AuthService {
             throw new InternalServerErrorException('validateOAuthLogin', err.message);
         }
     }
+
+    async validateUser(username: string, pass: string): Promise<any> {
+        const user = await this.userService.findOne({username});
+        Logger.log(user)
+        if (user && user.password === pass) {
+          const { password, ...result } = user;
+          return result;
+        }
+        return null;
+      }
+
+      // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+      async login(user: any) {
+        const payload = { username: user.username, sub: user.userId };
+        return {
+          access_token: this.jwtService.sign(payload),
+        };
+      }
+
+
 
 }
